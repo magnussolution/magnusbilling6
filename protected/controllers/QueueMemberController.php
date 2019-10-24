@@ -58,8 +58,6 @@ class QueueMemberController extends Controller
             $values['queue_name'] = $modelQueue->name;
         }
 
-        $this->generateQueueFile();
-
         return $values;
     }
 
@@ -76,6 +74,11 @@ class QueueMemberController extends Controller
             AsteriskAccess::instance()->writeAsteriskFile($model, '/etc/asterisk/queues_magnus.conf', 'name');
         }
 
+    }
+
+    public function afterSave($model, $values)
+    {
+        $this->generateQueueFile();
     }
 
     public function afterUpdateAll($strIds)
