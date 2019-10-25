@@ -31,7 +31,7 @@ class StandardCallAgi
                     $CalcAgi->updateSystem($MAGNUS, $agi);
 
                     if (!$result_callperf) {
-                        $this->executePlayAudio("prepaid-dest-unreachable", $agi);
+                        $MAGNUS->executePlayAudio("prepaid-dest-unreachable", $agi);
                         break;
                     }
 
