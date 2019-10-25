@@ -52,35 +52,35 @@ class QueueController extends Controller
 
             $uploaddir = '/var/lib/asterisk/moh/' . $model->name;
             shell_exec('mkdir -p ' . $uploaddir);
-            Yii::log(print_r($_FILES, true), 'error');
 
             $typefile   = explode('.', $_FILES["musiconhold"]["name"]);
             $uploadfile = $uploaddir . '/queue-' . time() . '.' . $typefile[1];
             move_uploaded_file($_FILES["musiconhold"]["tmp_name"], $uploadfile);
 
-            $modelQueue = Queue::model()->findAll(array(
-                'condition' => 'musiconhold != "default"',
-                'group'     => 'musiconhold',
-            ));
-            $file = '/etc/asterisk/musiconhold_magnus.conf';
-            $line = '';
-            $fd   = fopen($file, "w");
-            foreach ($modelQueue as $key => $queue) {
-                if ($fd) {
-                    shell_exec('mkdir -p /var/lib/asterisk/moh/' . $queue->name);
-                    $line .= "\n\n[" . $queue->name . "]\n";
-                    $line .= "mode=files\n";
-                    $line .= "directory=/var/lib/asterisk/moh/" . $queue->name . "\n\n";
-                }
-            }
-            if (fwrite($fd, $line) === false) {
-                Yii::log("Impossible to write to the file ($file)", 'error');
-            }
-
             $model->musiconhold = $model->name;
             $model->save();
 
             AsteriskAccess::instance()->mohReload();
+        }
+
+        $modelQueue = Queue::model()->findAll(array(
+            'condition' => 'musiconhold != "default"',
+            'group'     => 'musiconhold',
+        ));
+
+        $file = '/etc/asterisk/musiconhold_magnus.conf';
+        $line = '';
+        $fd   = fopen($file, "w");
+        foreach ($modelQueue as $key => $queue) {
+            if ($fd) {
+                $line .= "\n\n[" . $queue->name . "]\n";
+                $line .= "mode=files\n";
+                $line .= "directory=/var/lib/asterisk/moh/" . $queue->name . "\n\n";
+            }
+        }
+
+        if (fwrite($fd, $line) === false) {
+            Yii::log("Impossible to write to the file ($file)", 'error');
         }
 
         $this->generateQueueFile();
