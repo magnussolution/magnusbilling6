@@ -1647,8 +1647,6 @@ class UpdateMysqlCommand extends ConsoleCommand
             $version = '6.7.4';
             $sql     = "UPDATE pkg_configuration SET config_value = '" . $version . "' WHERE config_key = 'version' ";
             Yii::app()->db->createCommand($sql)->execute();
-
-            exec("echo '\n*/2 * * * * php /var/www/html/mbilling/cron.php PhoneBooksReprocess\n' >> /var/spool/cron/root");
         }
 
     }
