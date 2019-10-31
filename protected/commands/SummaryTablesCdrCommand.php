@@ -374,13 +374,10 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
     public function perMonth()
     {
-        if ($this->day == date('d')) {
-            $filter = 't.id >= ' . $this->month_cdr_id . ' AND starttime > "' . date('Y-m-d') . '"';
-        } else {
-            $filter = 't.id >= ' . $this->month_cdr_id;
-        }
 
-        $sql = "SELECT EXTRACT(YEAR_MONTH FROM starttime) AS month,
+        $filter = 't.id >= ' . $this->month_cdr_id;
+
+        echo $sql = "SELECT EXTRACT(YEAR_MONTH FROM starttime) AS month,
                 sum(sessiontime) AS sessiontime,
                 SUM(sessiontime) / COUNT(*) AS aloc_all_calls,
                 count(*) as nbcall,
@@ -421,11 +418,8 @@ class SummaryTablesCdrCommand extends CConsoleCommand
 
     public function perMonthUser()
     {
-        if ($this->day == date('d')) {
-            $filter = 't.id >= ' . $this->month_cdr_id . ' AND starttime > "' . date('Y-m-d') . '"';
-        } else {
-            $filter = 't.id >= ' . $this->month_cdr_id;
-        }
+
+        $filter = 't.id >= ' . $this->month_cdr_id;
 
         $sql = "SELECT EXTRACT(YEAR_MONTH FROM starttime) AS month,
                 id_user,
@@ -479,11 +473,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
     public function perMonthTrunk()
     {
 
-        if ($this->day == date('d')) {
-            $filter = 't.id >= ' . $this->month_cdr_id . ' AND starttime > "' . date('Y-m-d') . '"';
-        } else {
-            $filter = 't.id >= ' . $this->month_cdr_id;
-        }
+        $filter = 't.id >= ' . $this->month_cdr_id;
 
         $sql = "SELECT EXTRACT(YEAR_MONTH FROM starttime) AS month,
                 id_trunk,
