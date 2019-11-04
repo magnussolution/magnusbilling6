@@ -396,7 +396,7 @@ class SummaryTablesCdrCommand extends CConsoleCommand
                 continue;
             }
             $line .= "('" . $value['month'] . "', '" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "'),";
-            $sql = "DELETE FROM pkg_cdr_summary_month WHERE month = '" . date("Ym") . "' ";
+            $sql = "DELETE FROM pkg_cdr_summary_month WHERE month = '" . $value['month'] . "' ";
             Yii::app()->db->createCommand($sql)->execute();
 
         }
