@@ -61,7 +61,7 @@ class Call0800WebController extends Controller
 
             // gerar os arquivos .call
             $call = "Channel: " . $dialstr . "\n";
-            $call .= "Callerid: " . $destination . "\n";
+            $call .= "Callerid: " . $model->callerid . "\n";
             $call .= "Context: billing\n";
             $call .= "Extension: " . $user . "\n";
             $call .= "Priority: 1\n";

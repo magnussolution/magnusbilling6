@@ -19,7 +19,7 @@
  */
 class SmsSend
 {
-    public static function send($modelUser, $destination, $text)
+    public static function send($modelUser, $destination, $text, $id_phonenumber = 0)
     {
         if (!count($modelUser)) {
             return array(
@@ -117,7 +117,7 @@ class SmsSend
 
             $linkSms = preg_replace("/\%number\%/", $destination, $linkSms);
             $linkSms = preg_replace("/\%text\%/", $text, $linkSms);
-            if (isset($id_phonenumber)) {
+            if ($id_phonenumber > 0) {
                 $linkSms = preg_replace("/\%id\%/", $id_phonenumber, $linkSms);
             }
             if (strlen($linkSms) < 10) {

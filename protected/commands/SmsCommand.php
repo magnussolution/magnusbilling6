@@ -123,7 +123,7 @@ class SmsCommand extends ConsoleCommand
                 }
                 echo $sms->idPhonebook->idUser->username . " - " . $sms->number . " -" . $text . "\n";
 
-                $res = SmsSend::send($sms->idPhonebook->idUser, $sms->number, $text);
+                $res = SmsSend::send($sms->idPhonebook->idUser, $sms->number, $text, $sms->id);
                 $sms->try++;
                 $sms->status = isset($res['success']) && $res['success'] == true ? 3 : 2;
                 $sms->save();
