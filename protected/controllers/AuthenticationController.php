@@ -160,9 +160,9 @@ class AuthenticationController extends Controller
             Yii::app()->session['showGoogleCode']           = false;
             Yii::app()->session['newGoogleAuthenticator']   = false;
             Yii::app()->session['checkGoogleAuthenticator'] = false;
-        }
 
-        MagnusLog::insertLOG(1, 'Username Login on the panel - User ' . Yii::app()->session['username']);
+            MagnusLog::insertLOG(1, 'Username Login on the panel - User ' . Yii::app()->session['username']);
+        }
 
         if (isset($_REQUEST['remote'])) {
             header("Location: ../..");
@@ -358,11 +358,11 @@ class AuthenticationController extends Controller
             Yii::app()->session['checkGoogleAuthenticator'] = false;
             $modelUser->googleAuthenticator_enable          = 1;
             $modelUser->save();
+            MagnusLog::insertLOG(1, 'Username Login on the panel - User ' . Yii::app()->session['username']);
         } else {
             $sussess = false;
         }
         //$sussess = true;
-
         echo json_encode(array(
             'success' => $sussess,
             'msg'     => Yii::app()->session['name_user'],
