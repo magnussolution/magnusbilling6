@@ -594,12 +594,16 @@ class SummaryTablesCdrCommand extends CConsoleCommand
                 GROUP BY t.id_trunk";
         $result = Yii::app()->db->createCommand($sql)->queryAll();
 
-        if (!isset($result[0]['id_trunk'])) {
+        if (count($result) == 0) {
             return;
         }
 
         $line = '';
         foreach ($result as $key => $value) {
+            if (!is_numeric($value['id_trunk'])) {
+                continue;
+            }
+
             $line .= "('" . $value['id_trunk'] . "','" . $value['sessiontime'] . "','" . $value['aloc_all_calls'] . "','" . $value['nbcall'] . "','" . $value['buycost'] . "','" . $value['sessionbill'] . "'),";
         }
 
