@@ -578,7 +578,7 @@ class MassiveCall
                 $agi->verbose('$MAGNUS->id_agent' . $MAGNUS->id_agent . ' $id_call' . $id_call . '$destination' . $destination, 10);
 
                 $CalcAgi->sessiontime = $duration;
-                $CalcAgi->updateSystemAgent($agi, $MAGNUS, $destination, $sellratecost);
+                $CalcAgi->updateSystemAgent($agi, $MAGNUS, $destination, $sellratecost, $duration);
             } else {
                 $sql = "UPDATE pkg_user SET credit = credit - " . $MAGNUS->round_precision(abs($sellratecost)) . "
                         WHERE id =  $MAGNUS->id_user LIMIT 1";
