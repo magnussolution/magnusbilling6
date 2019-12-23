@@ -31,7 +31,7 @@ tar xzf master.tar.gz --strip-components=1
 if [[ $1 == 'php' ]]; then
 	yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm yum-utils
 	yum-config-manager --enable remi-php71
-	yum -y update php
+	yum -y update php --skip-broken
 	chown -R asterisk:asterisk /var/lib/php/session/
 	systemctl restart httpd
 fi

@@ -23,6 +23,8 @@ class Did extends Model
 {
     protected $_module = 'did';
     public $username;
+    public $country;
+    public $city;
     /**
      * Retorna a classe estatica da model.
      * @return Prefix classe estatica da model.

@@ -22,7 +22,7 @@
 
 class QueueController extends Controller
 {
-    public $attributeOrder = 'id';
+    public $attributeOrder = 't.id';
     public $extraValues    = array('idUser' => 'username');
 
     private $host     = 'localhost';

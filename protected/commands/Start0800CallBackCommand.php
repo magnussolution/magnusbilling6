@@ -143,6 +143,10 @@ class Start0800CallBackCommand extends ConsoleCommand
                         print_r($modelError);
                     }
 
+                } else {
+                    $callback->status      = 0;
+                    $callback->sessiontime = 0;
+                    $callback->save();
                 }
 
             }
