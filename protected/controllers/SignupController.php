@@ -63,9 +63,6 @@ class SignupController extends Controller
                 $mail->setTitle('NEW USER SIGNUP FROM MAGNUSBILLING SIGNUP FORM. USERNAME ');
                 $mail->send($this->config['global']['admin_email']);
             }
-
-            $signup = Signup::model()->findByPk((int) $id);
-            $this->render('view', array('signup' => $signup));
         }
     }
 
@@ -118,11 +115,11 @@ class SignupController extends Controller
 
             $modelPlan = Plan::model()->findByPk((int) $_POST['Signup']['id_plan']);
 
-            if($modelPlan->signup != 1){
+            if ($modelPlan->signup != 1) {
                 //error if invalid plan(tampered data)
                 $signup->addError('id_plan', Yii::t('yii', 'Invalid plan used to signup'));
-            }else{
-                $success              = $signup->save();
+            } else {
+                $success = $signup->save();
 
                 //add the new user to SuperLogica
                 $this->createUserinSuperLogica();
